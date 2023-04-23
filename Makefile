@@ -44,25 +44,25 @@ test-coverage:
 	@cat cover.out >> coverage.txt
 
 packr:
-	cd pkg/repo && packr
+	cd pkg/repo && packr2
 
 prepare:
 	cd scripts && bash prepare.sh
 
 ## make install: Go install the project
 install:
-	cd pkg/repo && packr
+	cd pkg/repo && packr2
 	$(GO) install -ldflags '${GOLDFLAGS}' ./cmd/${APP_NAME}
 	@printf "${GREEN}Build bridge successfully!${NC}\n"
 
 build:
-	cd pkg/repo && packr
+	cd pkg/repo && packr2
 	@mkdir -p bin
 	$(GO) build -ldflags '${GOLDFLAGS}' ./cmd/${APP_NAME}
 	@mv ./bridge bin
 	@printf "${GREEN}Build bridge successfully!${NC}\n"
 
-docker-build: packr
+docker-build: packr2
 	$(GO) install -ldflags '${STATIC_LDFLAGS}' ./cmd/${APP_NAME}
 	@echo "Build bridge successfully"
 
